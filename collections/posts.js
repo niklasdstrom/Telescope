@@ -242,7 +242,7 @@ Meteor.methods({
     properties.createdAt = new Date();
 
     // PostedAt
-    if(properties.status == 2){ // only set postedAt if post is approved
+    if(properties.status == STATUS_APPROVED){ // only set postedAt if post is approved
       if(isAdmin(Meteor.user()) && !!post.postedAt){ // if user is admin and a custom postDate has been set
         properties.postedAt = post.postedAt;
       }else{ // else use current time
@@ -298,14 +298,14 @@ Meteor.methods({
   approvePost: function(post){
     if(isAdmin(Meteor.user())){
       var now = new Date();
-      Posts.update(post._id, {$set: {status: 2, postedAt: now}});
+      Posts.update(post._id, {$set: {status: STATUS_APPROVED, postedAt: now}});
     }else{
       throwError('You need to be an admin to do that.');
     }
   },
   unapprovePost: function(post){
     if(isAdmin(Meteor.user())){
-      Posts.update(post._id, {$set: {status: 1}});
+      Posts.update(post._id, {$set: {status: STATUS_PENDING}});
     }else{
       throwError('You need to be an admin to do that.');
     }

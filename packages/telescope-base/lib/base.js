@@ -59,7 +59,7 @@ viewParameters.best = function (terms) {
 
 viewParameters.pending = function (terms) {
   return {
-    find: {status: 1}, 
+    find: {status: STATUS_PENDING}, 
     options: {sort: {createdAt: -1}}
   };
 }

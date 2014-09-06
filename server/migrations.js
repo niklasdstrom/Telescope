@@ -46,7 +46,7 @@ var migrationsList = {
     var i = 0;
     Posts.find({status: {$exists : false}}).forEach(function (post) {
       i++;
-      Posts.update(post._id, {$set: {status: 2}});
+      Posts.update(post._id, {$set: {status: STATUS_APPROVED}});
       console.log("---------------------");
       console.log("Post: "+post.title);
       console.log("Updating status to approved");  
